@@ -3,28 +3,30 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Modal, Form, Input, List, Space } from "antd";
 import { addTask } from "./taskSlice";
 
+interface formValues {
+	descripcion: string;
+}
+
 const Tasks: React.FC = () => {
 	const [form] = Form.useForm();
 	const [isModalVisible, setIsModalVisible] = useState(false);
-	const [taskDescription, setTaskDescription] = useState("");
 	const tasks = useSelector((state: any) => state.tasks.tasks);
 	const dispatch = useDispatch();
 
 	const showModal = () => {
 		setIsModalVisible(true);
+		form.resetFields();
 	};
 
-	const handleOk = () => {
-		if (taskDescription.trim() !== "") {
-			dispatch(addTask(taskDescription));
+	const handleOk = (values: formValues) => {
+		if (values.descripcion.trim() !== "") {
+			dispatch(addTask(values.descripcion));
 			setIsModalVisible(false);
-			setTaskDescription("");
 		}
 	};
 
 	const handleCancel = () => {
 		setIsModalVisible(false);
-		setTaskDescription("");
 	};
 
 	return (
@@ -42,13 +44,11 @@ const Tasks: React.FC = () => {
 			<Modal title="Agregar nuevo tarea" open={isModalVisible} footer={null}>
 				<Form form={form} onFinish={handleOk}>
 					<Form.Item
+						tooltip="Campo requerido"
+						name="descripcion"
 						rules={[{ required: true, message: "Favor, agregue descripción" }]}
 					>
-						<Input
-							placeholder="Descripción de la tarea"
-							value={taskDescription}
-							onChange={(e) => setTaskDescription(e.target.value)}
-						/>
+						<Input placeholder="Descripción de la tarea" />
 					</Form.Item>
 					<Space>
 						<Button type="primary" htmlType="submit">
