@@ -1,63 +1,69 @@
-import React, { useState } from "react";
-import { Menu, Button, Row, Col } from "antd";
-import { HomeOutlined, UnorderedListOutlined } from "@ant-design/icons";
+import React from "react";
+import { Button, Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
-// import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import "antd/dist/antd.css";
 
 function App() {
 	const navigate = useNavigate();
-	const [selectedValue, setSelectedValue] = useState(null);
-
 	return (
-		<Col
+		<div
 			style={{
+				height: "100vh",
 				display: "flex",
+				flexDirection: "column",
 				justifyContent: "center",
 				alignItems: "center",
-				height: "100vh", // Set height to 100% of the viewport height
 			}}
 		>
-			<Row
-				gutter={16}
-				style={{
-					margin: 16,
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-				}}
-			>
-				<Col span={24}>
+			<Row style={{ marginBottom: 16 }}>
+				<Col
+					span={24}
+					style={{
+						alignContent: "center",
+						alignItems: "center",
+						textAlign: "center",
+					}}
+				>
 					<Button
 						type="primary"
 						size="large"
-						style={{ height: "80px", fontSize: "24px" }}
+						style={{
+							height: "60px",
+							fontSize: "24px",
+							borderRadius: 16,
+							width: "120px",
+						}}
 						onClick={() => navigate("/tasks")}
 					>
 						Tasks
 					</Button>
 				</Col>
 			</Row>
-			<Row
-				gutter={16}
-				style={{
-					margin: 16,
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-				}}
-			>
-				<Col span={24}>
+			<Row gutter={8}>
+				<Col
+					span={24}
+					style={{
+						alignContent: "center",
+						alignItems: "center",
+						textAlign: "center",
+					}}
+				>
 					<Button
 						type="primary"
 						size="large"
-						style={{ height: "80px", fontSize: "24px" }}
+						style={{
+							height: "60px",
+							fontSize: "24px",
+							borderRadius: 16,
+							width: "120px",
+						}}
 						onClick={() => navigate("/tasks")}
 					>
-						Tasks
+						Lists
 					</Button>
 				</Col>
 			</Row>
-		</Col>
+		</div>
 	);
 }
 
