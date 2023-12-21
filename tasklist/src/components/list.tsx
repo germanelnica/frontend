@@ -1,7 +1,8 @@
 // En tu componente que renderiza la lista (por ejemplo, Listado.tsx)
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { List, Avatar } from "antd";
+import { List, Avatar, Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
 interface Element {
 	id: string;
@@ -13,6 +14,7 @@ interface Element {
 const ListTask: React.FC = () => {
 	const [elements, setElements] = useState<Element[]>([]);
 	const [loading, setLoading] = useState(true);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -32,20 +34,25 @@ const ListTask: React.FC = () => {
 	}, []);
 
 	return (
-		<List
-			itemLayout="horizontal"
-			dataSource={elements}
-			loading={loading}
-			renderItem={(item: Element) => (
-				<List.Item>
-					<List.Item.Meta
-						avatar={<Avatar src={item.avatar} alt={item.name} />}
-						title={item.name}
-						description={`Created at: ${item.createdAt}`}
-					/>
-				</List.Item>
-			)}
-		/>
+		<>
+			<Button type="link" onClick={() => navigate("/")}>
+				Menú
+			</Button>
+			<List
+				itemLayout="horizontal"
+				dataSource={elements}
+				loading={loading}
+				renderItem={(item: Element) => (
+					<List.Item>
+						<List.Item.Meta
+							avatar={<Avatar src={item.avatar} alt={item.name} />}
+							title={item.name}
+							description={`Created at: ${item.createdAt}`}
+						/>
+					</List.Item>
+				)}
+			/>
+		</>
 	);
 };
 

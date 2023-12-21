@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Modal, Form, Input, List, Space } from "antd";
 import { addTask } from "./taskSlice";
+import { useNavigate } from "react-router-dom";
 
 interface formValues {
 	descripcion: string;
@@ -9,6 +10,8 @@ interface formValues {
 
 const Tasks: React.FC = () => {
 	const [form] = Form.useForm();
+	const navigate = useNavigate();
+
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const tasks = useSelector((state: any) => state.tasks.tasks);
 	const dispatch = useDispatch();
@@ -31,9 +34,14 @@ const Tasks: React.FC = () => {
 
 	return (
 		<div>
-			<Button type="primary" onClick={showModal}>
-				Agregar nueva tarea
-			</Button>
+			<Space>
+				<Button type="link" onClick={() => navigate("/")}>
+					Menú
+				</Button>
+				<Button type="primary" onClick={showModal}>
+					Agregar nueva tarea
+				</Button>
+			</Space>
 			<List
 				dataSource={tasks}
 				renderItem={(task: any) => (
