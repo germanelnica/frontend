@@ -41,7 +41,9 @@ const Tasks: React.FC = () => {
 
 			<Modal title="Agregar nuevo tarea" open={isModalVisible} footer={null}>
 				<Form form={form} onFinish={handleOk}>
-					<Form.Item rules={[{ required: true }]}>
+					<Form.Item
+						rules={[{ required: true, message: "Favor, agregue descripción" }]}
+					>
 						<Input
 							placeholder="Descripción de la tarea"
 							value={taskDescription}
