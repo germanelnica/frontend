@@ -1,69 +1,17 @@
 import React from "react";
-import { Button, Row, Col } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import Menu from "./components/menu"; // El componente que contiene los botones
+import ListTask from "./components/list"; // El componente de las tareas
+import Tasks from "./components/tasks/tasks"; // El componente de las tareas
 import "antd/dist/antd.css";
 
 function App() {
-	const navigate = useNavigate();
 	return (
-		<div
-			style={{
-				height: "100vh",
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-		>
-			<Row style={{ marginBottom: 16 }}>
-				<Col
-					span={24}
-					style={{
-						alignContent: "center",
-						alignItems: "center",
-						textAlign: "center",
-					}}
-				>
-					<Button
-						type="primary"
-						size="large"
-						style={{
-							height: "60px",
-							fontSize: "24px",
-							borderRadius: 16,
-							width: "120px",
-						}}
-						onClick={() => navigate("/tasks")}
-					>
-						Tasks
-					</Button>
-				</Col>
-			</Row>
-			<Row gutter={8}>
-				<Col
-					span={24}
-					style={{
-						alignContent: "center",
-						alignItems: "center",
-						textAlign: "center",
-					}}
-				>
-					<Button
-						type="primary"
-						size="large"
-						style={{
-							height: "60px",
-							fontSize: "24px",
-							borderRadius: 16,
-							width: "120px",
-						}}
-						onClick={() => navigate("/tasks")}
-					>
-						Lists
-					</Button>
-				</Col>
-			</Row>
-		</div>
+		<Routes>
+			<Route path="/" element={<Menu />} /> {/* 👈 Renders at /app/ */}
+			<Route path="/tasks" element={<Tasks />} /> {/* 👈 Renders at /app/ */}
+			<Route path="/list" element={<ListTask />} /> {/* 👈 Renders at /app/ */}
+		</Routes>
 	);
 }
 
