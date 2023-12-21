@@ -25,6 +25,8 @@ const ListTask: React.FC = () => {
 				setElements(response.data);
 			} catch (error) {
 				console.error("Error fetching data:", error);
+				setElements([]);
+				setLoading(false);
 			} finally {
 				setLoading(false);
 			}
